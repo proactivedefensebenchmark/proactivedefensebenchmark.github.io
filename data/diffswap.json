@@ -1,0 +1,239 @@
+{
+  "celebahq": [
+    {
+      "method": "PGD",
+      "setting": "whitebox",
+      "mse": 0.0046,
+      "lpips": 0.0293,
+      "cidr": 0.0363,
+      "brisque": 4.0007,
+      "avgrank": 5.13,
+      "rob": 0.4438,
+      "te": 0.2895
+    },
+    {
+      "method": "Disrupting",
+      "setting": "whitebox",
+      "mse": 0.0046,
+      "lpips": 0.0283,
+      "cidr": 0.0425,
+      "brisque": 3.85,
+      "avgrank": 5.38,
+      "rob": 0.4319,
+      "te": 0.3628
+    },
+    {
+      "method": "DF-RAP",
+      "setting": "whitebox",
+      "mse": 0.0047,
+      "lpips": 0.0294,
+      "cidr": 0.0459,
+      "brisque": 4.0877,
+      "avgrank": 3.5,
+      "rob": 0.4594,
+      "te": 0.4956
+    },
+    {
+      "method": "Anti-Forgery",
+      "setting": "whitebox",
+      "mse": 0.0043,
+      "lpips": 0.0309,
+      "cidr": 0.043,
+      "brisque": 3.5432,
+      "avgrank": 5.63,
+      "rob": 0.4137,
+      "te": 0.4128
+    },
+    {
+      "method": "Latent Attack",
+      "setting": "whitebox",
+      "mse": 0.0097,
+      "lpips": 0.0693,
+      "cidr": 0.2674,
+      "brisque": 3.5636,
+      "avgrank": 2.25,
+      "rob": 0.3498,
+      "te": 0.4375
+    },
+    {
+      "method": "SCOL",
+      "setting": "blackbox",
+      "mse": 0.0051,
+      "lpips": 0.0309,
+      "cidr": 0.1139,
+      "brisque": 3.8448,
+      "avgrank": 3.38,
+      "rob": 0.4395,
+      "te": null
+    },
+    {
+      "method": "NullSwap",
+      "setting": "blackbox",
+      "mse": 0.0053,
+      "lpips": 0.0316,
+      "cidr": 0.2131,
+      "brisque": 3.7283,
+      "avgrank": 2.75,
+      "rob": 0.4157,
+      "te": null
+    }
+  ],
+  "ffhq": [
+    {
+      "method": "PGD",
+      "setting": "whitebox",
+      "mse": 0.0051,
+      "lpips": 0.0372,
+      "cidr": 0.0435,
+      "brisque": -4.8245,
+      "avgrank": 5.38,
+      "rob": 0.9539,
+      "te": 0.1861
+    },
+    {
+      "method": "Disrupting",
+      "setting": "whitebox",
+      "mse": 0.005,
+      "lpips": 0.0372,
+      "cidr": 0.0331,
+      "brisque": -4.7708,
+      "avgrank": 5.63,
+      "rob": 0.9894,
+      "te": 0.262
+    },
+    {
+      "method": "DF-RAP",
+      "setting": "whitebox",
+      "mse": 0.0052,
+      "lpips": 0.0378,
+      "cidr": 0.0446,
+      "brisque": -4.6004,
+      "avgrank": 4.0,
+      "rob": 0.9745,
+      "te": 0.3926
+    },
+    {
+      "method": "Anti-Forgery",
+      "setting": "whitebox",
+      "mse": 0.0063,
+      "lpips": 0.0414,
+      "cidr": 0.0524,
+      "brisque": -5.2541,
+      "avgrank": 4.5,
+      "rob": 0.8873,
+      "te": 0.248
+    },
+    {
+      "method": "Latent Attack",
+      "setting": "whitebox",
+      "mse": 0.0115,
+      "lpips": 0.0939,
+      "cidr": 0.2939,
+      "brisque": -5.135,
+      "avgrank": 2.25,
+      "rob": 0.8501,
+      "te": 0.3357
+    },
+    {
+      "method": "SCOL",
+      "setting": "blackbox",
+      "mse": 0.0057,
+      "lpips": 0.0406,
+      "cidr": 0.1322,
+      "brisque": -5.0286,
+      "avgrank": 3.75,
+      "rob": 0.9762,
+      "te": null
+    },
+    {
+      "method": "NullSwap",
+      "setting": "blackbox",
+      "mse": 0.0059,
+      "lpips": 0.0416,
+      "cidr": 0.2249,
+      "brisque": -5.0176,
+      "avgrank": 2.5,
+      "rob": 0.9856,
+      "te": null
+    }
+  ],
+  "vgg": [
+    {
+      "method": "PGD",
+      "setting": "whitebox",
+      "mse": 0.0061,
+      "lpips": 0.038,
+      "cidr": 0.0413,
+      "brisque": 15.5201,
+      "avgrank": 5.5,
+      "rob": 0.6744,
+      "te": 0.3139
+    },
+    {
+      "method": "Disrupting",
+      "setting": "whitebox",
+      "mse": 0.0057,
+      "lpips": 0.0378,
+      "cidr": 0.0391,
+      "brisque": 15.6934,
+      "avgrank": 5.5,
+      "rob": 0.6736,
+      "te": 0.3766
+    },
+    {
+      "method": "DF-RAP",
+      "setting": "whitebox",
+      "mse": 0.0062,
+      "lpips": 0.039,
+      "cidr": 0.0337,
+      "brisque": 15.598,
+      "avgrank": 4.63,
+      "rob": 0.6735,
+      "te": 0.4952
+    },
+    {
+      "method": "Anti-Forgery",
+      "setting": "whitebox",
+      "mse": 0.006,
+      "lpips": 0.0379,
+      "cidr": 0.045,
+      "brisque": 15.8499,
+      "avgrank": 3.75,
+      "rob": 0.6751,
+      "te": 0.3992
+    },
+    {
+      "method": "Latent Attack",
+      "setting": "whitebox",
+      "mse": 0.0143,
+      "lpips": 0.0923,
+      "cidr": 0.2418,
+      "brisque": 14.8338,
+      "avgrank": 2.5,
+      "rob": 0.6209,
+      "te": 0.4271
+    },
+    {
+      "method": "SCOL",
+      "setting": "blackbox",
+      "mse": 0.0062,
+      "lpips": 0.0395,
+      "cidr": 0.0639,
+      "brisque": 15.5943,
+      "avgrank": 3.13,
+      "rob": 0.6733,
+      "te": null
+    },
+    {
+      "method": "NullSwap",
+      "setting": "blackbox",
+      "mse": 0.0066,
+      "lpips": 0.0414,
+      "cidr": 0.1593,
+      "brisque": 15.3361,
+      "avgrank": 3.0,
+      "rob": 0.6699,
+      "te": null
+    }
+  ]
+}

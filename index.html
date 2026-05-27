@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deepfake Proactive Defense — Benchmark against Deepfake Generation</title>
+<meta name="description" content="The first comprehensive benchmark systematically assessing disruption, robustness, and transferability of proactive defenses against deepfake generation." />
+
+<meta property="og:title" content="Deepfake Proactive Defense — Benchmark against Deepfake Generation" />
+<meta property="og:description" content="A unified evaluation protocol for proactive defenses, covering pixel, perceptual, and identity metrics across 9 deepfake generators." />
+<meta property="og:type" content="website" />
+
+<link rel="icon" type="image/jpeg" href="assets/img/safeaichar.jpeg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-text">Deepfake Proactive Defense</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#leaderboards">Leaderboards</a>
+      <a href="#about">About</a>
+      <a href="#protocol">Protocol</a>
+      <a href="#faq">FAQ</a>
+      <a href="#citation">Cite</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <a href="https://icml.cc/Conferences/2026" target="_blank" rel="noopener" class="hero-venue">
+        <img src="assets/img/ICML-logo.svg" alt="ICML 2026" />
+        <span class="hero-venue-text">ICML 2026</span>
+      </a>
+      <h1 class="hero-title">
+        <span class="hero-accent">Proactive Defense Benchmark</span>
+        <br>
+        against Deepfake Generation
+      </h1>
+      <div class="hero-actions">
+        <a href="#leaderboards" class="btn btn-primary">View Leaderboards</a>
+        <a href="https://icml.cc/virtual/2026/poster/62016" target="_blank" rel="noopener" class="btn btn-ghost">Read the Paper</a>
+        <a href="#" target="_blank" rel="noopener" class="btn btn-ghost">GitHub →</a>
+      </div>
+      <p class="hero-authors">
+        Joonhyuk Baek<sup>*</sup>, Wonjune Seo<sup>*</sup>, Jae-yun Kim,
+        Saerom Park<sup>†</sup>, Hoki Kim<sup>†</sup>
+      </p>
+      <p class="hero-author-note">
+        <sup>*</sup> Equal contribution &nbsp;·&nbsp; <sup>†</sup> Corresponding author
+      </p>
+    </div>
+  </div>
+  <div class="hero-scanline" aria-hidden="true"></div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About the Benchmark</h2>
+    </div>
+
+    <div class="prose">
+      <p>
+        Despite the proliferation of proactive defenses against deepfakes, the
+        lack of a unified evaluation protocol precludes fair comparison and
+        masks critical vulnerabilities. Existing studies rely on incompatible
+        choices of metrics and generators, rendering cross-paper comparisons
+        ambiguous, and current evaluations frequently overlook the gap between
+        ideal settings and real-world deployment.
+      </p>
+      <p>
+        <strong>Our benchmark</strong> bridges this gap. We define a comprehensive
+        taxonomy of evaluation metrics across four key dimensions —
+        <em>pixel-level fidelity</em>, <em>perceptual fidelity</em>,
+        <em>identity disruption</em>, and <em>visual quality</em> — and
+        systematically evaluate seven representative defenses against eight
+        deepfake generators spanning attribute manipulation and face swap.
+      </p>
+      <p>
+        Our analysis exposes critical blind spots: fidelity and identity
+        metrics capture orthogonal performance axes, often leading to
+        conflicting interpretations when relied upon individually. We further
+        identify a fundamental trade-off where peak white-box performance
+        signals overfitting rather than genuine protection, and we introduce a
+        calibrated evaluation to correct generator-induced identity bias.
+      </p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">◈</div>
+        <h3>Disruption</h3>
+        <p>How effectively the defense degrades the deepfake output across
+           pixel, perceptual, identity, and visual-quality dimensions.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">◈</div>
+        <h3>Robustness</h3>
+        <p>How well the defense survives practical transformations — JPEG
+           compression, blur, Gaussian and salt-and-pepper noise.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">◈</div>
+        <h3>Transferability</h3>
+        <p>How well a defense crafted against one generator generalizes to
+           unseen target generators with diverse architectures.</p>
+      </div>
+    </div>
+
+    <figure class="teaser-fig">
+      <img src="assets/img/figure.png" alt="Radar charts comparing proactive defenses across generators and datasets" />
+      <figcaption>
+        Check out <a href="https://icml.cc/virtual/2026/poster/62016" target="_blank" rel="noopener">our paper</a> for a detailed analysis.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ PROTOCOL ============ -->
+<section class="section section-alt" id="protocol">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Evaluation Protocol</h2>
+    </div>
+
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <h3>Metrics</h3>
+        <ul class="protocol-list">
+          <li><strong>MSE</strong> <span>↑ pixel-wise fidelity</span></li>
+          <li><strong>LPIPS</strong> <span>↑ perceptual fidelity</span></li>
+          <li><strong>CIDR</strong> <span>↑ identity disruption</span></li>
+          <li><strong>BRISQUE</strong> <span>↑ visual quality</span></li>
+          <li><strong>AvgRank</strong> <span>↓ aggregate rank</span></li>
+          <li><strong>ROB</strong> <span>↑ robustness score</span></li>
+          <li><strong>TE</strong> <span>↑ transferability</span></li>
+        </ul>
+      </div>
+
+      <div class="protocol-card">
+        <h3>Generators</h3>
+        <div class="protocol-sub">Attribute Manipulation</div>
+        <ul class="protocol-tags">
+          <li>StarGAN</li><li>StyleCLIP</li><li>DiffAE</li>
+        </ul>
+        <div class="protocol-sub">Face Swap</div>
+        <ul class="protocol-tags">
+          <li>SimSwap</li><li>pSp-mix</li><li>BlendFace</li>
+          <li>DiffSwap</li><li>DiffFace</li>
+        </ul>
+      </div>
+
+      <div class="protocol-card">
+        <h3>Datasets</h3>
+        <ul class="protocol-list">
+          <li><strong>CelebA-HQ</strong></li>
+          <li><strong>FFHQ</strong></li>
+          <li><strong>VGGFace2-HQ</strong></li>
+        </ul>
+        <div class="protocol-sub" style="margin-top:18px">Robustness Probes</div>
+        <ul class="protocol-tags">
+          <li>JPEG</li><li>Blur</li><li>Gaussian Noise</li><li>Salt &amp; Pepper</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEADERBOARDS ============ -->
+<section class="section" id="leaderboards">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Leaderboards</h2>
+    </div>
+
+    <p class="prose">
+      Select a deepfake generator and a dataset to view its leaderboard.
+      Click any column header to sort — AvgRank is lower-is-better; all
+      other metrics are higher-is-better.
+    </p>
+
+    <!-- Tabs: grouped by task type -->
+    <div class="tabs-wrap">
+      <div class="tab-group-label">Attribute Manipulation</div>
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" data-task="stargan" role="tab">StarGAN</button>
+        <button class="tab" data-task="styleclip" role="tab">StyleCLIP</button>
+        <button class="tab" data-task="diffae" role="tab">DiffAE</button>
+      </div>
+      <div class="tab-group-label">Face Swap</div>
+      <div class="tabs" role="tablist">
+        <button class="tab" data-task="simswap" role="tab">SimSwap</button>
+        <button class="tab" data-task="psp" role="tab">pSp-mix</button>
+        <button class="tab" data-task="blendface" role="tab">BlendFace</button>
+        <button class="tab" data-task="diffswap" role="tab">DiffSwap</button>
+        <button class="tab" data-task="diffface" role="tab">DiffFace</button>
+      </div>
+    </div>
+
+    <!-- Task header -->
+    <div class="task-header">
+      <div>
+        <h3 class="task-title" id="task-title">Leaderboard: StarGAN · CelebA-HQ</h3>
+        <p class="task-sub" id="task-sub">
+          Attribute manipulation task on CelebA-HQ. Evaluation follows our
+          unified protocol.
+        </p>
+      </div>
+      <div class="task-controls">
+        <label class="search-wrap">
+          <span class="visually-hidden">Search</span>
+          <input type="search" id="lb-search" placeholder="Search method..." />
+        </label>
+        <label class="filter-wrap">
+          <span class="visually-hidden">Dataset</span>
+          <select id="lb-dataset">
+            <option value="celebahq">CelebA-HQ</option>
+            <option value="ffhq">FFHQ</option>
+            <option value="vgg">VGGFace2-HQ</option>
+          </select>
+        </label>
+        <label class="filter-wrap">
+          <span class="visually-hidden">Filter</span>
+          <select id="lb-filter">
+            <option value="all">All settings</option>
+            <option value="whitebox">White-box only</option>
+            <option value="blackbox">Black-box only</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <!-- Leaderboard table -->
+    <div class="table-wrap">
+      <table class="lb-table" id="leaderboard">
+        <thead>
+          <tr>
+            <th class="th-rank">Rank</th>
+            <th data-sort="method">Method</th>
+            <th data-sort="setting">Setting</th>
+            <th data-sort="avgrank" data-numeric="1" data-dir="asc" class="th-primary">AvgRank ↓</th>
+            <th data-sort="mse" data-numeric="1">MSE ↑</th>
+            <th data-sort="lpips" data-numeric="1">LPIPS ↑</th>
+            <th data-sort="cidr" data-numeric="1">CIDR ↑</th>
+            <th data-sort="brisque" data-numeric="1">BRISQUE ↑</th>
+            <th data-sort="rob" data-numeric="1">ROB ↑</th>
+            <th data-sort="te" data-numeric="1">TE ↑</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body">
+          <!-- populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <p class="table-footnote">
+      Ranks are computed per generator by AvgRank (lower is better).
+      TE (transferability) is only defined for white-box defenses; "—" denotes
+      values not reported in the paper. All numbers are from Table 2 of our paper.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">FAQ</h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>What does "proactive defense" mean, and how does it differ from detection?</summary>
+        <p>
+          Detection-based defenses act <em>after</em> a deepfake is generated,
+          training a classifier to flag manipulated content. Proactive
+          defenses act <em>before</em>: by preemptively modifying input
+          images prior to release, they disrupt the deepfake generation
+          process itself, producing visibly broken or identity-shifted
+          outputs.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What is CIDR, and why introduce a new identity metric?</summary>
+        <p>
+          CIDR (Calibrated Identity Disruption Rate) is our proposed metric
+          that corrects for generator-induced identity bias. Standard
+          identity-distance metrics implicitly entangle two effects: the
+          defense's perturbation, and the generator's intrinsic tendency to
+          alter identity. CIDR isolates the former, giving a fairer measure
+          of identity-level disruption attributable to the defense.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why use AvgRank instead of averaging metrics directly?</summary>
+        <p>
+          Pixel-, perceptual-, and identity-metrics have incompatible scales
+          and distributions. Direct averaging would let one metric dominate
+          purely due to its scale. AvgRank aggregates by ranking each defense
+          per metric and per generator, then averaging the ranks — a
+          scale-invariant aggregation. Lower AvgRank means consistently
+          strong relative performance.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What does "overfitting" mean in this context?</summary>
+        <p>
+          We observe that defenses with the highest white-box disruption
+          often transfer poorly to unseen generators and degrade sharply
+          under post-processing. Peak white-box performance, in other words,
+          can signal over-specialization to a single generator's gradient
+          landscape rather than genuine, generalizable protection.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Which defenses are evaluated?</summary>
+        <p>
+          We evaluate seven representative defenses spanning multiple
+          paradigms: <em>White-box</em> — PGD, Disrupting Deepfakes, DF-RAP,
+          Anti-Forgery, Latent Attack. <em>Black-box</em> — SCOL, NullSwap.
+          See Appendix B (Table 5) of the paper for details on each method.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CITATION ============ -->
+<section class="section section-alt" id="citation">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Citation</h2>
+    </div>
+    <p class="prose">
+      If you use our benchmark in your research, please cite our paper.
+    </p>
+    <div class="citation-pending">
+      <span class="citation-pending-label">BibTeX</span>
+      <p class="citation-pending-text">Coming soon — citation information will be added upon the camera-ready release.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-foot">
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <p class="foot-tag">Proactive Defense Benchmark against Deepfake Generation · ICML 2026 ·
+         Safe AI Lab.</p>
+    </div>
+    <div class="foot-links">
+      <a href="#leaderboards">Leaderboards</a>
+      <a href="#protocol">Protocol</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="foot-copy">© 2026 Safe AI Lab · Built as a static site for GitHub Pages.</div>
+  </div>
+</footer>
+
+<script src="assets/refs.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
